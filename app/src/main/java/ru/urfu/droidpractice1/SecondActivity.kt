@@ -19,7 +19,9 @@ class SecondActivity : ComponentActivity() {
         binding = ActivitySecondBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val isReadInitial = intent.getBooleanExtra("EXTRA_IS_READ", false)
+        val isReadInitial = savedInstanceState?.getBoolean(KEY_IS_READ)
+            ?: intent.getBooleanExtra(EXTRA_IS_READ, false)
+
         binding.switchRead.isChecked = isReadInitial
         updateResult(isReadInitial)
 
@@ -46,7 +48,7 @@ class SecondActivity : ComponentActivity() {
 
     private fun updateResult(isRead: Boolean) {
         val resultIntent = Intent().apply {
-            putExtra("EXTRA_IS_READ", isRead)
+            putExtra(EXTRA_IS_READ, isRead)
         }
         setResult(RESULT_OK, resultIntent)
     }
@@ -74,5 +76,15 @@ class SecondActivity : ComponentActivity() {
     override fun onDestroy() {
         super.onDestroy()
         Log.d("SecondActivityLifecycle", "onDestroy")
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        outState.putBoolean(KEY_IS_READ, binding.switchRead.isChecked)
+    }
+
+    companion object {
+        const val EXTRA_IS_READ = "EXTRA_IS_READ"
+        private const val KEY_IS_READ = "KEY_IS_READ"
     }
 }

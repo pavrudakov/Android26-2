@@ -24,7 +24,6 @@ import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.Share
 import androidx.compose.material.icons.filled.ThumbUp
-import androidx.compose.material.icons.filled.Warning
 import androidx.compose.material.icons.outlined.ThumbUp
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -61,7 +60,17 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import coil.compose.SubcomposeAsyncImage
 import ru.urfu.droidpractice1.R
+import ru.urfu.droidpractice1.ui.theme.AccentCyan
+import ru.urfu.droidpractice1.ui.theme.DarkCardBackground
 import ru.urfu.droidpractice1.ui.theme.DroidPractice1Theme
+import ru.urfu.droidpractice1.ui.theme.GalacticBlue
+import ru.urfu.droidpractice1.ui.theme.MarsRed
+import ru.urfu.droidpractice1.ui.theme.NebulaPurple
+import ru.urfu.droidpractice1.ui.theme.SecondaryCardBackground
+import ru.urfu.droidpractice1.ui.theme.SpaceBlack
+import ru.urfu.droidpractice1.ui.theme.SuccessGreenBackground
+import ru.urfu.droidpractice1.ui.theme.SuccessGreenIcon
+import ru.urfu.droidpractice1.ui.theme.SuccessGreenText
 
 @Composable
 fun MainActivityScreen(
@@ -86,8 +95,8 @@ fun MainActivityScreen(
                         )
                     },
                     colors = TopAppBarDefaults.topAppBarColors(
-                        containerColor = Color(0xFF0B0D17),
-                        titleContentColor = Color(0xFF00B4D8)
+                        containerColor = SpaceBlack,
+                        titleContentColor = AccentCyan
                     )
                 )
             }
@@ -98,7 +107,7 @@ fun MainActivityScreen(
                     .padding(innerPadding)
                     .background(
                         brush = Brush.verticalGradient(
-                            colors = listOf(Color(0xFF0B0D17), Color(0xFF1B264F))
+                            colors = listOf(SpaceBlack, GalacticBlue)
                         )
                     )
                     .verticalScroll(rememberScrollState())
@@ -110,13 +119,13 @@ fun MainActivityScreen(
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(24.dp),
                     elevation = CardDefaults.cardElevation(defaultElevation = 8.dp),
-                    colors = CardDefaults.cardColors(containerColor = Color(0xFF161B22).copy(alpha = 0.8f))
+                    colors = CardDefaults.cardColors(containerColor = DarkCardBackground.copy(alpha = 0.8f))
                 ) {
                     Column(modifier = Modifier.padding(20.dp)) {
                         Text(
                             text = stringResource(id = R.string.article_1_title),
                             style = MaterialTheme.typography.headlineMedium,
-                            color = Color(0xFF00B4D8),
+                            color = AccentCyan,
                             fontWeight = FontWeight.ExtraBold,
                             lineHeight = 34.sp
                         )
@@ -134,7 +143,7 @@ fun MainActivityScreen(
                             contentScale = ContentScale.Crop,
                             loading = {
                                 Box(Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-                                    CircularProgressIndicator(color = Color(0xFF00B4D8))
+                                    CircularProgressIndicator(color = AccentCyan)
                                 }
                             }
                         )
@@ -154,20 +163,20 @@ fun MainActivityScreen(
                             modifier = Modifier
                                 .fillMaxWidth()
                                 .clip(RoundedCornerShape(topStart = 4.dp, bottomStart = 4.dp, topEnd = 16.dp, bottomEnd = 16.dp))
-                                .background(Color(0xFF00B4D8).copy(alpha = 0.1f))
+                                .background(AccentCyan.copy(alpha = 0.1f))
                         ) {
                             Row(verticalAlignment = Alignment.CenterVertically) {
                                 Box(
                                     modifier = Modifier
                                         .width(4.dp)
                                         .height(80.dp)
-                                        .background(Color(0xFF00B4D8))
+                                        .background(AccentCyan)
                                 )
                                 Spacer(modifier = Modifier.width(16.dp))
                                 Text(
                                     text = stringResource(id = R.string.article_1_quote),
                                     style = MaterialTheme.typography.bodyLarge,
-                                    color = Color(0xFF00B4D8),
+                                    color = AccentCyan,
                                     fontStyle = FontStyle.Italic,
                                     fontWeight = FontWeight.Medium,
                                     modifier = Modifier.padding(vertical = 12.dp, horizontal = 4.dp)
@@ -182,7 +191,7 @@ fun MainActivityScreen(
                                 append(stringResource(id = R.string.article_1_text_part_2))
                                 append("\n\n")
                                 withStyle(style = SpanStyle(
-                                    background = Color(0xFFD90429).copy(alpha = 0.3f),
+                                    background = MarsRed.copy(alpha = 0.3f),
                                     fontWeight = FontWeight.Bold,
                                     color = Color.White
                                 )) {
@@ -211,7 +220,7 @@ fun MainActivityScreen(
                                     likes--
                                 },
                                 shape = RoundedCornerShape(12.dp),
-                                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF00B4D8))
+                                colors = ButtonDefaults.buttonColors(containerColor = AccentCyan)
                             ) {
                                 Icon(Icons.Default.ThumbUp, contentDescription = null, modifier = Modifier.size(18.dp))
                                 Spacer(modifier = Modifier.width(4.dp))
@@ -226,7 +235,7 @@ fun MainActivityScreen(
                                 },
                                 shape = RoundedCornerShape(12.dp),
                                 border = ButtonDefaults.outlinedButtonBorder.copy(width = 2.dp),
-                                colors = ButtonDefaults.outlinedButtonColors(contentColor = Color(0xFF00B4D8))
+                                colors = ButtonDefaults.outlinedButtonColors(contentColor = AccentCyan)
                             ) {
                                 Icon(Icons.Outlined.ThumbUp, contentDescription = null, modifier = Modifier.size(18.dp))
                                 Spacer(modifier = Modifier.width(4.dp))
@@ -243,7 +252,7 @@ fun MainActivityScreen(
                                     dislikes--
                                 },
                                 shape = RoundedCornerShape(12.dp),
-                                colors = ButtonDefaults.buttonColors(containerColor = Color(0xFFD90429))
+                                colors = ButtonDefaults.buttonColors(containerColor = MarsRed)
                             ) {
                                 Text(text = "👎 $dislikes", fontWeight = FontWeight.Bold)
                             }
@@ -256,7 +265,7 @@ fun MainActivityScreen(
                                 },
                                 shape = RoundedCornerShape(12.dp),
                                 border = ButtonDefaults.outlinedButtonBorder.copy(width = 2.dp),
-                                colors = ButtonDefaults.outlinedButtonColors(contentColor = Color(0xFFD90429))
+                                colors = ButtonDefaults.outlinedButtonColors(contentColor = MarsRed)
                             ) {
                                 Text(text = "👎 $dislikes")
                             }
@@ -267,7 +276,7 @@ fun MainActivityScreen(
                     Button(
                         onClick = { onShareClick(shareText) },
                         shape = RoundedCornerShape(12.dp),
-                        colors = ButtonDefaults.buttonColors(containerColor = Color(0xFF4B3061))
+                        colors = ButtonDefaults.buttonColors(containerColor = NebulaPurple)
                     ) {
                         Icon(Icons.Default.Share, contentDescription = null, modifier = Modifier.size(18.dp))
                         Spacer(modifier = Modifier.width(4.dp))
@@ -280,9 +289,9 @@ fun MainActivityScreen(
                 Card(
                     modifier = Modifier.fillMaxWidth(),
                     shape = RoundedCornerShape(16.dp),
-                    border = if (isSecondArticleRead) null else ButtonDefaults.outlinedButtonBorder.copy(brush = Brush.linearGradient(listOf(Color(0xFF00B4D8), Color(0xFF4B3061)))),
+                    border = if (isSecondArticleRead) null else ButtonDefaults.outlinedButtonBorder.copy(brush = Brush.linearGradient(listOf(AccentCyan, NebulaPurple))),
                     colors = CardDefaults.cardColors(
-                        containerColor = if (isSecondArticleRead) Color(0xFF1B4332).copy(alpha = 0.4f) else Color(0xFF161B22).copy(alpha = 0.6f)
+                        containerColor = if (isSecondArticleRead) SuccessGreenBackground.copy(alpha = 0.4f) else DarkCardBackground.copy(alpha = 0.6f)
                     )
                 ) {
                     Row(
@@ -292,7 +301,7 @@ fun MainActivityScreen(
                         Icon(
                             imageVector = if (isSecondArticleRead) Icons.Default.CheckCircle else Icons.Default.Info,
                             contentDescription = null,
-                            tint = if (isSecondArticleRead) Color(0xFF74C69D) else Color(0xFF00B4D8)
+                            tint = if (isSecondArticleRead) SuccessGreenIcon else AccentCyan
                         )
                         Spacer(modifier = Modifier.width(12.dp))
                         val statusText = if (isSecondArticleRead) {
@@ -304,7 +313,7 @@ fun MainActivityScreen(
                             text = stringResource(id = R.string.second_article_read_status, statusText),
                             style = MaterialTheme.typography.titleMedium,
                             fontWeight = FontWeight.Bold,
-                            color = if (isSecondArticleRead) Color(0xFFB7E4C7) else Color(0xFF00B4D8)
+                            color = if (isSecondArticleRead) SuccessGreenText else AccentCyan
                         )
                     }
                 }
@@ -314,7 +323,7 @@ fun MainActivityScreen(
                 Text(
                     text = "МЕЖГАЛАКТИЧЕСКИЕ НОВОСТИ",
                     style = MaterialTheme.typography.labelLarge,
-                    color = Color(0xFF00B4D8).copy(alpha = 0.7f),
+                    color = AccentCyan.copy(alpha = 0.7f),
                     fontWeight = FontWeight.Bold,
                     letterSpacing = 2.sp
                 )
@@ -327,7 +336,7 @@ fun MainActivityScreen(
                         .clickable { onNextArticleClick() },
                     shape = RoundedCornerShape(20.dp),
                     elevation = CardDefaults.cardElevation(defaultElevation = 4.dp),
-                    colors = CardDefaults.cardColors(containerColor = Color(0xFF21262D))
+                    colors = CardDefaults.cardColors(containerColor = SecondaryCardBackground)
                 ) {
                     Row(
                         modifier = Modifier
@@ -351,7 +360,7 @@ fun MainActivityScreen(
                             Text(
                                 text = stringResource(id = R.string.article_2_title),
                                 style = MaterialTheme.typography.titleMedium,
-                                color = Color(0xFF00B4D8),
+                                color = AccentCyan,
                                 fontWeight = FontWeight.Bold,
                                 maxLines = 1,
                                 overflow = TextOverflow.Ellipsis
@@ -370,7 +379,7 @@ fun MainActivityScreen(
                         Icon(
                             imageVector = Icons.Default.KeyboardArrowRight,
                             contentDescription = null,
-                            tint = Color(0xFF00B4D8)
+                            tint = AccentCyan
                         )
                     }
                 }

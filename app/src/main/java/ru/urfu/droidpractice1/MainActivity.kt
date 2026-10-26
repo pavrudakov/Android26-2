@@ -22,7 +22,7 @@ class MainActivity : ComponentActivity() {
         ActivityResultContracts.StartActivityForResult()
     ) { result ->
         if (result.resultCode == RESULT_OK) {
-            isSecondArticleRead = result.data?.getBooleanExtra("EXTRA_IS_READ", false) ?: false
+            isSecondArticleRead = result.data?.getBooleanExtra(SecondActivity.EXTRA_IS_READ, false) ?: false
         }
     }
 
@@ -36,7 +36,7 @@ class MainActivity : ComponentActivity() {
         Coil.setImageLoader(imageLoader)
 
         if (savedInstanceState != null) {
-            isSecondArticleRead = savedInstanceState.getBoolean("KEY_IS_READ", false)
+            isSecondArticleRead = savedInstanceState.getBoolean(KEY_IS_READ, false)
         }
 
         setContent {
@@ -51,7 +51,7 @@ class MainActivity : ComponentActivity() {
                 },
                 onNextArticleClick = {
                     val intent = Intent(this, SecondActivity::class.java).apply {
-                        putExtra("EXTRA_IS_READ", isSecondArticleRead)
+                        putExtra(SecondActivity.EXTRA_IS_READ, isSecondArticleRead)
                     }
                     startSecondActivityForResult.launch(intent)
                 }
@@ -86,6 +86,10 @@ class MainActivity : ComponentActivity() {
 
     override fun onSaveInstanceState(outState: Bundle) {
         super.onSaveInstanceState(outState)
-        outState.putBoolean("KEY_IS_READ", isSecondArticleRead)
+        outState.putBoolean(KEY_IS_READ, isSecondArticleRead)
+    }
+
+    companion object {
+        private const val KEY_IS_READ = "KEY_IS_READ"
     }
 }
